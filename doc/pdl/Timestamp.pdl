@@ -1,0 +1,353 @@
+<?xml version="1.0" ?>
+
+<library>
+	<name>TimeStamp</name>
+	<version>1.5</version>
+	<description>This library contains utilies for each date and time manipulation</description>
+	<classes>
+		<class>
+			<name>TimeStamp</name>
+			<description>Represents a moment in time</description>
+			<methods>
+				<method>
+					<name>valid_timezone</name>
+					<arguments>
+						<argument>
+							<name>timezone</name>
+							<type>string</type>
+							<description>A timezone abbreviation string to check</description>
+						</argument>
+					</arguments>
+					<description>Check if a given timezone exists</description>
+					<return-value>
+						<type>boolean</type>
+						<description>Whether the timezone was valid or not</description>
+					</return-value>
+				</method>
+				<constructor>
+					<arguments>
+						<argument>
+							<name>date</name>
+							<type>array</type>
+							<description>
+								An array of associatively- or numerically-indexed
+								date components
+							</description>
+						</argument>
+					</arguments>
+					<description>Creates a new TimeStamp object with the given date</description>
+				</constructor>
+				<constructor>
+					<arguments>
+						<argument>
+							<name>date</name>
+							<type>string</type>
+							<description>
+								A string in the format YYYYMMDDHHMMSS
+								representing a date
+							</description>
+						</argument>
+					</arguments>
+					<description>Creates a new TimeStamp object with the given date</description>
+				</constructor>
+				<constructor>
+					<arguments>
+						<argument>
+							<name>timestamp</name>
+							<type>int</type>
+							<description>
+								A UNIX timestamp (number of seconds since
+								the epoch) representing a date
+							</description>
+						</argument>
+					</arguments>
+					<description>Creates a new TimeStamp object with the given date</description>
+				</constructor>
+				<constructor>
+					<arguments>
+						<argument>
+							<name>year</name>
+							<type>int</type>
+							<description>A 4-digit year</description>
+						</argument>
+						<argument>
+							<name>month</name>
+							<type>int</type>
+							<description>The number month, starting with January as 1</description>
+						</argument>
+						<argument>
+							<name>day</name>
+							<type>int</type>
+							<description>The day of the month</description>
+						</argument>
+						<argument>
+							<name>hour</name>
+							<type>int</type>
+							<description>The hour of the day, in 24-hour format</description>
+						</argument>
+						<argument>
+							<name>minute</name>
+							<type>int</type>
+							<description>The minute of the hour</description>
+						</argument>
+						<argument>
+							<name>second</name>
+							<type>int</type>
+							<description>The second of the minute</description>
+						</argument>
+						<argument>
+							<name>timezone</name>
+							<type>int</type>
+							<description>The timezone where this date takes relevancy</description>
+						</argument>
+					</arguments>
+					<description>
+						Creates a new TimeStamp object with the given year, month, day,
+						etc
+					</description>
+				</constructor>
+				<method>
+					<name>get_unix</name>
+					<description>
+						Get the UNIX timestamp for the concurrent date of a TimeStamp
+						object
+					</description>
+					<return-value>
+						<type>int</type>
+						<description>A UNIX timestamp of a date</description>
+					</return-value>
+				</method>
+				<method>
+					<name>get_string</name>
+					<description>
+						Get a string in the format YYYYMMDDHHMMSS (year, month, day,
+						hour, minute second) reflecting the date in a TimeStamp
+						object
+					</description>
+					<return-value>
+						<type>string</type>
+						<description>
+							A string in the format YYYYMMDDHHMMSS representing a date
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>load_unix</name>
+					<arguments>
+						<argument>
+							<name>timestamp</name>
+							<type>int</type>
+							<description>The UNIX timestamp for the new date</description>
+						</argument>
+					</arguments>
+					<description>Set the date of a TimeStamp object from a UNIX timestamp</description>
+				</method>
+				<method>
+					<name>format</name>
+					<arguments>
+						<argument>
+							<name>format</name>
+							<type>string</type>
+							<description>
+								A string in PHP's date() format to return
+								a formatted version of a TimeStamp object's
+								concurrent date
+							</description>
+						</argument>
+					</arguments>
+					<description>Format a TimeStamp's concurrent date to another form</description>
+					<return-value>
+						<type>string</type>
+						<description>The formatted date string</description>
+					</return-value>
+				</method>
+				<method>
+					<name>set_string</name>
+					<description>This method is deprecated. Use load_string() instead.</description>
+				</method>
+				<method>
+					<name>load_string</name>
+					<arguments>
+						<argument>
+							<name>timestamp</name>
+							<type>string</type>
+							<description>A string in the format YYYYMMDDHHMMSS representing a date</description>
+						</argument>
+					</arguments>
+					<description>Set the date of a TimeStamp object</description>
+					<return-value>
+						<type>boolean</type>
+						<description>
+							A Boolean value is returned determined by whether or not the date
+							string could be loaded
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>add</name>
+					<arguments>
+						<argument>
+							<name>timestamp</name>
+							<type>TimeStamp</type>
+							<description>Another TimeStamp object to add</description>
+						</argument>
+					</arguments>
+					<description>Add the dates from two TimeStamp objects</description>
+					<return-value>
+						<type>TimeStamp</type>
+						<description>
+							A new, computed TimeStamp is returned containing the sum of the
+							TimeStamps
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>subtract</name>
+					<arguments>
+						<argument>
+							<name>timestamp</name>
+							<type>TimeStamp</type>
+							<description>Another TimeStamp object to subtract</description>
+						</argument>
+					</arguments>
+					<description>Subtract a date from a TimeStamp object</description>
+					<return-value>
+						<type>TimeStamp</type>
+						<description>
+							A new, computed TimeStamp is returned containing the difference
+							between the TimeStamps
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>fix</name>
+					<description>
+						This method &quot;cleans&quot; the internal values for the various parts
+						of a TimeStamp object (i.e., year, month, etc).
+
+						This method is used internally and no need should really arise for it
+						to be used in the public domain. Should the need arise, it is present.
+					</description>
+				</method>
+				<method>
+					<name>get_utc</name>
+					<description>This method is deprecated, use load_utc() instead.</description>
+				</method>
+				<method>
+					<name>get_gmt</name>
+					<description>This method is deprecated, use load_gmt() instead.</description>
+				</method>
+				<method>
+					<name>load_utc</name>
+					<arguments>
+						<argument>
+							<name>utc</name>
+							<type>string</type>
+							<description>A string containing a UTC-formatted date string</description>
+						</argument>
+					</arguments>
+					<description>Set the date of a TimeStamp object from a UTC-formatted date string</description>
+				</method>
+				<method>
+					<name>load_gmt</name>
+					<arguments>
+						<argument>
+							<name>utc</name>
+							<type>string</type>
+							<description>A string containing a UTC-formatted date string</description>
+						</argument>
+					</arguments>
+					<description>
+						Note: this method is an alias for load_utc().
+
+						Set the date of a TimeStamp object from a UTC-formatted date string
+					</description>
+				</method>
+				<method>
+					<name>load_now</name>
+					<description>
+						Note: this method is an alias for load_current().
+
+						Set the date of a TimeStamp object to reflect the concurrent date
+					</description>
+				</method>
+				<method>
+					<name>load_current</name>
+					<description>Set the date of a TimeStamp object to reflect the concurrent date</description>
+				</method>
+				<method>
+					<name>get_weekday</name>
+					<arguments>
+						<argument>
+							<name>is_string</name>
+							<type>boolean</type>
+							<description>
+								A Boolean value indicating whether to return the string
+								weekday or else number
+
+								A default value of TRUE is assumed
+							</description>
+						</argument>
+					</arguments>
+					<description>Get the weekday from a TimeStamp object</description>
+					<return-value>
+						<type>mixed</type>
+						<description>
+							A string containing the weekday from a TimeStamp object's date
+							or the number of the day of the week
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>set_timezone</name>
+					<arguments>
+						<argument>
+							<name>timezone</name>
+							<type>string</type>
+							<description>The abbreviation for a timezone</description>
+						</argument>
+					</arguments>
+					<description>
+						Sets the timezone for a TimeStamp object.
+
+						Note that this does not account for timezones changes. If this
+						functionality is desired, use change_timezone() instead.
+					</description>
+				</method>
+				<method>
+					<name>is_set</name>
+					<description>
+						This method checks if a particular TimeStamp object has had
+						its value set at some time
+					</description>
+				</method>
+				<method>
+					<name>change_timezone</name>
+					<arguments>
+						<argument>
+							<name>timezone</name>
+							<type>string</type>
+							<description>The abbreviation for a timezone</description>
+						</argument>
+					</arguments>
+					<description>
+						This method sets the timezone for a TimeStamp object as well as
+						accounting for the difference in hours lost between the old and
+						new timezones
+					</description>
+					<return-value>
+						<type>boolean</type>
+						<description>
+							A Boolean value is returned indicating success in changing
+							the timezone
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>clear</name>
+					<description>Resets the date of a TimeStamp object</description>
+				</method>
+			</methods>
+		</class>
+	</classes>
+</library>

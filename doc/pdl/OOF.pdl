@@ -1,0 +1,675 @@
+<?xml version="1.0" ?>
+
+<library>
+	<name>OF</name>
+	<version>1.7</version>
+	<description>
+		This library provides utilities for output formatting
+	</description>
+	<dependencies>
+		<dependency>
+			<name>CPL</name>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+	<constants>
+		<constant>
+			<name>OF_LIST_UN</name>
+			<description>Denotes an unordered list</description>
+		</constant>
+		<constant>
+			<name>OF_LIST_OD</name>
+			<description>Denotes an ordered list</description>
+		</constant>
+	</constants>
+	<classes>
+		<class>
+			<name>OF</name>
+			<description>This class provides an interface to output formatting</description>
+			<methods>
+				<method>
+					<name>form</name>
+					<description>
+						This method is a wrapper around the OF::form_start() and
+						OF::form_end() methods which generate a medium for submitting
+						data on the device receiving output
+					</description>
+					<arguments>
+						<argument>
+							<name>prefs</name>
+							<type>array</type>
+							<description>
+								This optional parameter is an array containing
+								key/value pairs for specifying form preferences
+
+								Possible key/value pairs are:
+
+								action - the URI to which data should be submitted -
+								defaults to the current page - other possible
+								values include any URI
+
+								method - how the data should be submitted to the URI -
+								defaults to &quot;post&quot; - other possible values
+								include &quot;get&quot;
+
+								enctype - the way submitted data should be encoded -
+								defaults to &quot;x-www-form-urlencoded&quot; - other
+								possible values include &quot;multipart/form-data&quot;
+							</description>
+						</argument>
+						<argument>
+							<name>data</name>
+							<type>string</type>
+							<description>
+								This and all other subsequent arguments are simply
+								returned as the value of the form object. All form
+								input fields should be placed within these arguments
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of a form
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>form_start</name>
+					<description>
+						Start a form
+					</description>
+					<arguments>
+						<argument>
+							<name>prefs</name>
+							<type>array</type>
+							<description>
+								This optional parameter is an array containing
+								key/value pairs for specifying form preferences
+
+								Possible key/value pairs are:
+
+								action - the URI to which data should be submitted -
+								defaults to the current page - other possible
+								values include any URI
+
+								method - how the data should be submitted to the URI -
+								defaults to &quot;post&quot; - other possible values
+								include &quot;get&quot;
+
+								enctype - the way submitted data should be encoded -
+								defaults to &quot;x-www-form-urlencoded&quot; - other
+								possible values include &quot;multipart/form-data&quot;
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the beginning of a form
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>form_end</name>
+					<description>
+						End a form
+					</description>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the of a form
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>table</name>
+					<description>
+						This method is a wrapper around the OF::table_start() and
+						OF::table_end() methods which generates output for a medium
+						for which to display tabular data
+					</description>
+					<arguments>
+						<argument>
+							<name>prefs</name>
+							<type>array</type>
+							<description>
+								This optional parameter contains an associative
+								array of key/value pairs describing table
+								properties
+
+								Possible key/value pairs include:
+
+								cellspacing - The spacing in pixels between table cells -
+								defaults to zero
+
+								cellpadding - The spacing in pixels lining table cells before
+								cell data starts - defaults to zero
+
+								border - The spacing in pixels of the outer-lining of the
+								table offset from other elements in the output - defaults
+								to zero
+
+								Other values specified in this array will specified in
+								output as well
+							</description>
+						</argument>
+						<argument>
+							<name>data</name>
+							<type>string</type>
+							<description>
+								This and all other subsequent arguments to this
+								method are simply used as the content of the
+								table, expected to be in proper table formatting,
+								which can be obtained from methods such as
+								OF::table_row() and OF::table_head()
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of a table
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>table_start</name>
+					<description>
+						Star a end
+					</description>
+					<arguments>
+						<argument>
+							<name>prefs</name>
+							<type>array</type>
+							<description>
+								This optional parameter contains an associative
+								array of key/value pairs describing table
+								properties
+
+								Possible key/value pairs include:
+
+								cellspacing - The spacing in pixels between table cells -
+								defaults to zero
+
+								cellpadding - The spacing in pixels lining table cells before
+								cell data starts - defaults to zero
+
+								border - The spacing in pixels of the outer-lining of the
+								table offset from other elements in the output - defaults
+								to zero
+
+								Other values specified in this array will specified in
+								output as well
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the beginning of a table
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>table_end</name>
+					<description>
+						End a table
+					</description>
+					<return-value>
+						<type>string</type>
+						<description>
+						The generated output of the ending of a table
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>table_row</name>
+					<description>
+						Add a table row to a table
+					</description>
+					<arguments>
+						<argument>
+							<name>row</name>
+							<type>mixed</type>
+							<description>
+								This and all subsequent arguments can be either strings
+								containing a particular cell's contents or an array containing
+								cell preferences, including contents. Specifying the content
+								value of a cell is denoted by the 'value' key from the
+								associative array passed as an argument to this method.
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the table row
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>table_head</name>
+					<description>
+						Add a table row of headers to a table
+					</description>
+					<arguments>
+						<argument>
+							<name>row</name>
+							<type>mixed</type>
+							<description>
+								This and all subsequent arguments can be either strings
+								containing a particular header cell's contents or an array
+								containing header cell preferences, included contents,
+								denoted by the associative array index 'value'.
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of a table row of headers
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>p</name>
+					<description>
+						Generate a paragraph
+					</description>
+					<arguments>
+						<argument>
+							<name>prefs</name>
+							<type>array</type>
+							<description>
+								This optional argument contains an associative array of
+								paragraph preferences
+							</description>
+						</argument>
+						<argument>
+							<name>value</name>
+							<type>string</type>
+							<description>
+								This and all of its subsequent arguments are concatenated
+								together to form the content of the paragraph
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of a paragraph
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>link</name>
+					<description>
+						Generate a hyperlink linking two electronic documents
+					</description>
+					<arguments>
+						<argument>
+							<name>prefs</name>
+							<type>array</type>
+							<description>
+								This associative array contains preferences for the hyperlink,
+								with the special index 'value' denoted the value of the
+								hyperlink (the `link text', as commonly referred to)
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the hyperlink
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>link</name>
+					<description>
+						Generate a hyperlink linking two electronic documents
+					</description>
+					<arguments>
+						<argument>
+							<name>value</name>
+							<type>string</type>
+							<description>
+								The value of the hyperlink (the `link text', as commonly
+								referred to)
+							</description>
+						</argument>
+						<argument>
+							<name>href</name>
+							<type>string</type>
+							<description>
+								The address of the document to which this hyperlink points
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the hyperlink
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>hr</name>
+					<description>
+						Generate a horizontal ruler
+					</description>
+					<arguments>
+						<argument>
+							<name>prefs</name>
+							<type>array</type>
+							<description>
+								This optional argument contains preferences for the horizontal
+								ruler
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the horizontal ruler
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>input</name>
+					<description>
+						Generate an input form field for user input/interaction
+					</description>
+					<arguments>
+						<argument>
+							<name>prefs</name>
+							<type>array</type>
+							<description>
+								This argument contains preferences for the user
+								input field. There are three main types, as
+								specified by the `type' name/value pair:
+
+								`select' is used for choosing a value from a list
+								of options, denoted by the `options' name/value
+								pair, should itself should contain an array
+								of name/value pairs for option labels and their
+								values.
+
+								`textarea' is used for gathering larger amounts
+								of text
+
+								Other fields include `password' and `text,' among
+								others
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the user input field
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>br</name>
+					<description>
+						Generate a line break
+					</description>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the line break
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>list_start</name>
+					<description>
+						Generate the beginning of a list
+					</description>
+					<arguments>
+						<argument>
+							<name>type</name>
+							<type>int</type>
+							<description>
+								The type of list. Values include `OF_LIST_UN' to
+								create an unordered list and `OF_LIST_OD' to
+								create an ordered list of items
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the beginning of the list
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>list_end</name>
+					<description>
+						Generate the end of a list
+					</description>
+					<arguments>
+						<argument>
+							<name>type</name>
+							<type>int</type>
+							<description>
+								The type of list. Values include `OF_LIST_UN' to
+								create an unordered list and `OF_LIST_OD' to
+								create an ordered list of items
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the end of the list
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>list_item</name>
+					<description>
+						Generate the output for a list element
+					</description>
+					<arguments>
+						<argument>
+							<name>item</name>
+							<type>string</type>
+							<description>
+								This value is used for the content of the list
+								item
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the list item
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>of_list</name>
+					<description>
+						This method is internally uses list_start() and list_end() to
+						encapsulate and ease the process of generating lists. It has the
+						prefix `of' to avoid conflicts with the native PHP built-in
+						list().
+					</description>
+					<arguments>
+						<argument>
+							<name>type</name>
+							<type>int</type>
+							<description>
+								The type of list. Values include `OF_LIST_UN' to
+								create an unordered list and `OF_LIST_OD' to
+								create an ordered list of items
+							</description>
+						</argument>
+						<argument>
+							<name>string</name>
+							<type>item</type>
+							<description>
+								This and all other subsequent arguments are
+								used as individual list items. Each argument
+								is internally passed to the method list_item().
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the list
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>header</name>
+					<description>
+						Generate a title header
+					</description>
+					<arguments>
+						<argument>
+							<name>header</name>
+							<type>string</type>
+							<description>
+								The content of the title header
+							</description>
+						</argument>
+						<argument>
+							<name>degree</name>
+							<type>int</type>
+							<description>
+								The degree of importance of the title header
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the title header
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>header</name>
+					<description>
+						Generate a title header
+					</description>
+					<arguments>
+						<argument>
+							<name>prefs</name>
+							<type>array</type>
+							<description>
+								This argument contains an array of name/value pairs
+								corresponding to title header preferences. The
+								`value' key corresponds to the title header value
+								and the `size' key corresponds to the title header
+								degree of importance
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the title header
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>emph</name>
+					<description>
+						Generate a range of emphasized output
+					</description>
+					<arguments>
+						<argument>
+							<name>str</name>
+							<type>string</type>
+							<description>
+								This and all other subsequent arguments are
+								concatenated together and is used as the value
+								of output to emphasize
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the range of emphasized output
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>pre</name>
+					<description>
+						Generate a range of preformatted text
+					</description>
+					<arguments>
+						<argument>
+							<name>str</name>
+							<type>string</type>
+							<description>
+								This argument is used as the value of the range
+								of preformatted text
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the range of preformatted text
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>tt</name>
+					<description>
+						Generate a range of typed text
+					</description>
+					<arguments>
+						<argument>
+							<name>str</name>
+							<type>string</type>
+							<description>
+								This argument is used as the vlaue of the range
+								of typed text
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the range of typed text
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>strong</name>
+					<description>
+						Generate a range of strongly-annotated text
+					</description>
+					<arguments>
+						<argument>
+							<name>str</name>
+							<type>string</type>
+							<description>
+								This and all other subsequent arguments are
+								concatenated together and are used as the value
+								of the range of strongly-annotated-text
+							</description>
+						</argument>
+					</arguments>
+					<return-value>
+						<type>string</type>
+						<description>
+							The generated output of the range of strongly-annotated text
+						</description>
+					</return-value>
+				</method>
+			</methods>
+		</class>
+	</classes>
+</library>

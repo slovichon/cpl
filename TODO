@@ -1,0 +1,10 @@
+$Id$
+
+OOF/html.inc
+	* link() doesn't need a value ( echo link(name=>foo) )
+
+Timestamp.inc
+	* TimeStamp::localize() to convert current timezone to locale one
+	* Confirm the timezones
+	* assert values aren't null on things like format()
+

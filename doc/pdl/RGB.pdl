@@ -1,0 +1,332 @@
+<?xml version="1.0" ?>
+
+<library>
+	<name>RGB</name>
+	<version>1.0</version>
+	<description>This library contains utilities for easy color and representations of color manipulation</description>
+	<classes>
+		<class>
+			<name>RGB</name>
+			<description>A class for easy manipulation of RGB values and colors</description>
+			<methods>
+				<constructor>
+					<arguments>
+						<argument>
+							<name>colors</name>
+							<type>array</type>
+							<description>
+								An array with keys "red", "green", and "blue" with
+								values as corresponding 0-255 color values, an array
+								with keys "r", "g", and "b" with values as
+								corresponding 0-255 color values, or an array with
+								the indexes 0, 1, and 2 with the corresponding red,
+								green, and blue 0-255 color values.
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						Creates a new RGB object with the specified red, green, and blue
+						colors values
+					</description>
+				</constructor>
+				<constructor>
+					<arguments>
+						<argument>
+							<name>hex</name>
+							<type>string</type>
+							<description>
+								The hexadecimal string of red, green, and blue
+								color values
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						Create a new RGB object based on a hexadecimal string of red,
+						green, and blue color values
+					</description>
+				</constructor>
+				<constructor>
+					<arguments>
+						<argument>
+							<name>red</name>
+							<type>int</type>
+							<description>
+								The red component, a number between 0 and 255,
+								of a color value
+							</description>
+						</argument>
+						<argument>
+							<name>green</name>
+							<type>int</type>
+							<description>
+								The green component, a number between 0 and 255,
+								of a color value
+							</description>
+						</argument>
+						<argument>
+							<name>blue</name>
+							<type>int</type>
+							<description>
+								The blue component, a number between 0 and 255,
+								of a color value
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						Create a new RGB object based on the red, green, and blue
+						components of a color value
+					</description>
+				</constructor>
+				<constructor>
+					<arguments>
+						<argument>
+							<name>value</name>
+							<type>int</type>
+							<description>
+								The long format of a color value, that is, the
+								red component, a number between 0 and 255,
+								multiplied by 255<sup>2</sup> added to the green
+								component, a number between 0 and 255, multiplied
+								by 255<sup>1</sup>, added to the blue component,
+								a number between 0 and 255, multiplied by
+								255<sup>0</sup>
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						Create a new RGB object based on the long format of a color value
+					</description>
+				</constructor>
+				<method>
+					<name>fix</name>
+					<description>
+						This method is primarily used internally by the RGB class
+						to rearrange and validate the various color components of the
+						concurrent color value. Since this method is called before
+						any important calculations are done, you should never need to call
+						it yourself
+					</description>
+				</method>
+				<method>
+					<name>to_hex</name>
+					<description>
+						Get the hexadecimal string for a color value
+					</description>
+					<return-value>
+						<type>string</type>
+						<description>
+							A string consisting of characters from the sequence
+							'0' through '9' and 'A' through 'F' describing in base-16
+							a color value
+							</description>
+					</return-value>
+				</method>
+				<method>
+					<name>load_hex</name>
+					<arguments>
+						<argument>
+							<name>hex</name>
+							<type>string</type>
+							<description>
+								A string containing the red, green, and blue
+								components of a color value, for example,
+								&quot;FFFFFF&quot;
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						Set the color value of an RGB object from a hexadecimal string
+					</description>
+					<return-value>
+						<type>bool</type>
+						<description>
+							This value indicates whether the color value could be
+							determined from the given hexadecimal string and loaded
+							into the RGB object's color value
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>load_hex</name>
+					<arguments>
+						<argument>
+							<name>red</name>
+							<type>string</type>
+							<description>
+								A string containing the red component in base-16
+								format for a color value
+							</description>
+						</argument>
+						<argument>
+							<name>green</name>
+							<type>string</type>
+							<description>
+								A string containing the green component in base-16
+								format for a color value
+							</description>
+						</argument>
+						<argument>
+							<name>blue</name>
+							<type>string</type>
+							<description>
+								A string containing the blue component in base-16
+								format for a color value
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						Set the color value of an RGB object from a hexadecimal string
+					</description>
+					<return-value>
+						<type>bool</type>
+						<description>
+							This value indicates whether the color value could be
+							determined from the given red, green, and blue hexadecimal
+							strings and loaded into the RGB object's color value
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>load_true_hex</name>
+					<arguments>
+						<argument>
+							<name>hex</name>
+							<type>int</type>
+							<description>
+								The long format of a color value
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						Note: this method is an alias for RGB::load_long().
+
+						Loads a color value into an RGB object from the long representation
+						of a color
+					</description>
+				</method>
+				<method>
+					<name>to_long</name>
+					<description>
+						Get the long representation of an RGB object's color value
+					</description>
+					<return-value>
+						<type>int</type>
+						<description>
+							The long representation of a color value, or the red
+							component, a number between 0 and 255, multiplied by
+							255<sup>2</sup>, added to the green component, a number
+							between 0 and 255<sup>1</sup>, added to the blue
+							component, a number between 0 and 255, multiplied by
+							255<sup>0</sup>
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>load_long</name>
+					<arguments>
+						<argument>
+							<name>value</name>
+							<type>int</type>
+							<description>
+								The long representation of a color value, that is,
+								the red component, a number between 0 and 255,
+								multiplied by 255<sup>2</sup>, added to the green
+								component, a number between 0 and 255<sup>1</sup>,
+								added to the bluecomponent, a number between 0 and
+								255, multiplied by 255<sup>0</sup>
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						Sets the color value of an RGB object from the long representation
+						of a color value
+					</description>
+				</method>
+				<method>
+					<name>to_num</name>
+					<description>
+						Get the red, green, and blue components, that is, numbers between
+						0 and 255 for each component, of the current color value of an
+						RGB object
+					</description>
+					<return-value>
+						<type>array</type>
+						<description>
+							An array with indicies 0, 1, and 2 pointing respectively
+							to the red, green, and blue components of a color value
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>load_num</name>
+					<arguments>
+						<argument>
+							<name>red</name>
+							<type>int</type>
+							<description>
+								The red component, a number between 0 and 255, of
+								a color value
+							</description>
+						</argument>
+						<argument>
+							<name>green</name>
+							<type>int</type>
+							<description>
+								The green component, a number between 0 and 255, of
+								a color value
+							</description>
+						</argument>
+						<argument>
+							<name>blue</name>
+							<type>int</type>
+							<description>
+								The blue component, a number between 0 and 255, of
+								a color value
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						Sets the value of an RGB object from the red, green, and blue
+						components of a color value
+					</description>
+				</method>
+				<method>
+					<name>to_name</name>
+					<description>
+						Grabs the logical color name for the color value of an RGB
+						object, if applicable
+					</description>
+					<return-value>
+						<type>string</type>
+						<description>
+							The logical color name of a color value
+						</description>
+					</return-value>
+				</method>
+				<method>
+					<name>load_name</name>
+					<arguments>
+						<argument>
+							<name>color</name>
+							<type>string</type>
+							<description>
+								The logical color name of a color value
+							</description>
+						</argument>
+					</arguments>
+					<description>
+						This method sets the color value of an RGB object from the color's
+						logical color name, such as &quot;black&quot; or &quot;red&quot;
+					</description>
+					<return-value>
+						<type>boolean</type>
+						<description>
+							Returns true if the logical color name could have its
+							corresponding color value loaded into the RGB object
+						</description>
+					</return-value>
+				</method>
+			</methods>
+		</class>
+	</classes>
+</library>

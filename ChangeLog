@@ -1,0 +1,36 @@
+$Id$
+
+Core Libraries
+1.1
+	* Embedded PHPDL inside the various libraries
+
+CPL.inc
+ 1.1
+	* Added nice_define(), trigger_errors()
+
+DBH/mysql.inc
+ 1.8
+	* Fixed an issue with caching and illegal storage of a resource
+	* Assumed default of SQL_REG for prepare_str()
+	* Added another constructor of array containing key/value pairs
+	  for connection prefs (host, user, etc)
+	* Added normalize_data() to "normalize" data from the RDBMS
+
+DBH/postgresql.inc
+ 1.8
+	* Fixed an issue with caching and illegal storage of a resource
+
+DBH/msql.inc
+ 1.8
+	* Fixed an issue with caching and illegal storage of a resource
+
+OOF/html.inc
+ 1.8
+	* Added $of->fieldset() method
+	* Fixed a bug in textarea inputs
+	* Added new methods fieldset(), div(), img(), email()
+	* Fixed a bug in select inputs
+	* htmlEntities() to things passed to pre()
+	* Added required 'rows' and 'cols' attributes to textarea inputs
+	* Added lots of overridable defaults to various previously hardcoded
+	  options

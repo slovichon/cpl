@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+
+<library>
+	<name>Benchmark</name>
+	<version>1.0</version>
+	<description>This library contains utilities for benchmarking program execution</description>
+	<dependencies>
+		<dependency>
+			<name>CPL</name>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<name>Benchmark</name>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+	<classes>
+		<class>
+			<name>Benchmark</name>
+			<description>This class can be used to benchmark program execution</description>
+			<methods>
+				<method>
+					<name>time</name>
+					<arguments>
+						<argument>
+							<name>code</name>
+							<type>string</type>
+							<description>The code to be executed</description>
+						</argument>
+						<argument>
+							<name>loops</name>
+							<type>int</type>
+							<description>The number of times to run the code</description>
+						</argument>
+					</arguments>
+					<description>Time how long it takes a piece of code to run so many times</description>
+					<return-value>
+						<type>TimeStamp</type>
+						<description>The amount of time it took to run the code</description>
+					</return-value>
+				</method>
+				<method>
+					<name>start</name>
+					<description>Start the timer</description>
+				</method>
+				<method>
+					<name>end</name>
+					<description>
+						End the timer and get the amount of time since the timer was started
+					</description>
+					<return-value>
+						<type>TimeStamp</type>
+						<description>The amount of time since the timer was started</description>
+					</return-value>
+				</method>
+			</methods>
+		</class>
+	</classes>
+</library>
