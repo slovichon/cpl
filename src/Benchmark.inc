@@ -5,7 +5,7 @@
 	class Benchmark {
 		var $ts;
 
-		function time($code,$loops = 1) {
+		function time($code, $loops = 1) {
 			if (function_exists($code))
 				$code .= "()";
 
@@ -21,7 +21,6 @@
 
 		function start() {
 			$this->ts = new TimeStamp();
-			return;
 		}
 
 		function end() {
