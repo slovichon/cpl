@@ -229,7 +229,7 @@
 		function display_errors() {
 			static $display_errors = FALSE;
 
-			if (func_get_args() == 1) {
+			if (func_num_args() == 1) {
 				$args = func_get_args();
 				$display_errors = $args[0];
 			}
