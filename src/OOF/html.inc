@@ -10,8 +10,7 @@
 		}
 
 		function _getprefs($elem, $prefs) {
-			return (array_merge($this->oof->_getprefs($elem),
-			    $prefs));
+			return ($this->oof->_getprefs($elem, $prefs));
 		}
 
 		function _start($name, $dprefs) {
