@@ -17,7 +17,7 @@
 
 		function OOF($cpl, $type, $prefs = NULL) {
 			if (!preg_match("/^[a-z]$/i", $type) ||
-			    !@include("OOF/$type.inc"))
+			    !@include_once("OOF/$type.inc"))
 				$cpl->handle_error("Invalid type");
 			$class = "OOF_$type";
 			$this->obj = new $class();
@@ -35,11 +35,13 @@
 			$this->prefs[$elem][$name] = $value;
 		}
 
-		function _getprefs($elem) {
+		function _getprefs($elem, $prefs) {
+			if (!is_array($prefs))
+				$prefs = array();
 			if (in_array($this->prefs))
-				return ($this->prefs[$elem])
+				return (array_merge($this->prefs[$elem], $prefs));
 			else
-				return (array());
+				return ($prefs);
 		}
 
 		function form() {
