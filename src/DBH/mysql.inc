@@ -52,7 +52,7 @@
 			$this->link_id = @mysql_pconnect($host,$username,$password);
 
 			if (!$this->link_id)
-				$this->handle_error("Cannot connect to database; "
+				$this->handle_error("Cannot connect to database; " .
 				    "host: $host; username: $username; using password: yes");
 
 			$this->select_database($database);
