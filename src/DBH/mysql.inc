@@ -54,9 +54,7 @@
 			if (!$this->link_id)
 				$this->handle_error("Cannot connect to database; " .
 				    "host: $host; username: $username; using password: yes");
-
 			$this->select_database($database);
-
 			array_push($saved, array (
 				'link_id'	=> $this->link_id,
 				'host'		=> $host,
@@ -153,11 +151,9 @@
 
 		function handle_error($msg) {
 			$msg .= "; MySQL error=" . ($this->link_id ? mysql_error($this->link_id) : mysql_error());
-
 			/* disconnect() may call us again. */
 #			$this->disconnect();
 			CPL::handle_error($msg);
-			exit(1);
 		}
 
 		# Make a string safe to place in an SQL query
