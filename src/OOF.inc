@@ -16,7 +16,7 @@
 		var $obj;
 
 		function OOF($cpl, $type, $prefs = array()) {
-			if (!preg_match("/^[a-z]$/i", $type) ||
+			if (!preg_match("/^[a-z]+$/i", $type) ||
 			    !@include_once("OOF/$type.inc"))
 				$cpl->handle_error("Invalid type");
 			$class = "OOF_$type";
