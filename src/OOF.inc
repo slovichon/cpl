@@ -38,7 +38,7 @@
 		function _getprefs($elem, $prefs) {
 			if (!is_array($prefs))
 				$prefs = array();
-			if (in_array($this->prefs))
+			if (in_array($elem, $this->prefs))
 				return (array_merge($this->prefs[$elem], $prefs));
 			else
 				return ($prefs);
@@ -64,8 +64,8 @@
 		}
 
 		function fieldset() {
-			call_user_func_array(array(&$this->obj, 'fieldset'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'fieldset'), $args);
 		}
 
 		function table() {
@@ -88,23 +88,23 @@
 		}
 
 		function table_row() {
-			call_user_func_array(array(&$this->obj, 'table_row'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'table_row'), $args);
 		}
 
 		function table_head() {
-			call_user_func_array(array(&$this->obj, 'table_head'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'table_head'), $args);
 		}
 
 		function p() {
-			call_user_func_array(array(&$this->obj, 'p'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'p'), $args);
 		}
 
 		function link() {
-			call_user_func_array(array(&$this->obj, 'link'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'link'), $args);
 		}
 
 		function hr($prefs = NULL) {
@@ -143,38 +143,38 @@
 		}
 
 		function header() {
-			call_user_func_array(array(&$this->obj, 'header'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'header'), $args);
 		}
 
 		function emph() {
-			call_user_func_array(array(&$this->obj, 'emph'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'emph'), $args);
 		}
 
 		function pre() {
-			call_user_func_array(array(&$this->obj, 'pre'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'pre'), $args);
 		}
 
 		function code() {
-			call_user_func_array(array(&$this->obj, 'code'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'code'), $args);
 		}
 
 		function strong() {
-			call_user_func_array(array(&$this->obj, 'strong'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'strong'), $args);
 		}
 
 		function span() {
-			call_user_func_array(array(&$this->obj, 'span'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'span'), $args);
 		}
 
 		function div() {
-			call_user_func_array(array(&$this->obj, 'div'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'div'), $args);
 		}
 
 		function img($prefs) {
@@ -182,8 +182,8 @@
 		}
 
 		function email() {
-			call_user_func_array(array(&$this->obj, 'div'),
-			    func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array(&$this->obj, 'email'), $args);
 		}
 	}
 ?>
