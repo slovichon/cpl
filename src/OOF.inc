@@ -15,12 +15,12 @@
 		var $prefs;
 		var $obj;
 
-		function OOF($cpl, $type, $prefs = NULL) {
+		function OOF($cpl, $type, $prefs = array()) {
 			if (!preg_match("/^[a-z]$/i", $type) ||
 			    !@include_once("OOF/$type.inc"))
 				$cpl->handle_error("Invalid type");
 			$class = "OOF_$type";
-			$this->obj = new $class();
+			$this->obj = new $class($this, $prefs);
 			if (is_array($prefs))
 				$this->_loadprefs($prefs);
 		}
