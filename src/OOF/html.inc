@@ -1,6 +1,6 @@
 <?php
 	/* $Id$ */
-	require_once 'CPL/1.1.inc';
+	require_once 'CPL.inc';
 
 	CPL::define("OF_LIST_UN", 1);
 	CPL::define("OF_LIST_OD", 2);
