@@ -4,9 +4,9 @@
 		var $cpl;
 		var $oof;
 
-		function OOF_html($oof, $cpl) {
-			$this->oof = $oof;
-			$this->cpl = $cpl;
+		function OOF_html(&$oof, &$cpl) {
+			$this->oof = &$oof;
+			$this->cpl = &$cpl;
 		}
 
 		function _getprefs($elem, $prefs) {
@@ -27,12 +27,13 @@
 		}
 
 		function _gen($name, $prefs, $data) {
-			if (!empty($data) || $name == "div" || $name == "a")
+			if ($data != '' || $name == "div" || $name == "a" ||
+			    $name == "td")
 				return ($this->_start($name, $prefs) .
 					$data .
 					$this->_end($name));
 			else
-				return (preg_replace("/>$/",
+				return (preg_replace("/>$/", "",
 				    $this->_start($name, $prefs)) . " />");
 		}
 
@@ -387,14 +388,15 @@
 			if ($args['display']) {
 				return 	  "<script type='text/javascript'>"
 					.	"<!--"
-					.		"document.write('<a href=\"mailto:'+'$matches[0]'+'@'+'$matches[1]'\">{$prefs['value']}</a>')"
+					.		"document.write('<a href=\"mail'+'to:"
+					.		    "'+'$matches[0]'+'@'+'$matches[1]'\">{$prefs['value']}</a>')"
 					.	"//-->"
 					. "</script>"
 					. "<noscript>"
 					.	$prefs['value']
 					#. 	" - "
 					.	"&lt;"
-					.	preg_replace("/@/",":<!--\n-->:AT:<!--\n-->:",$prefs['addr'])
+					.	preg_replace("/@/", ":<!--\n-->:AT:<!--\n-->:", $prefs['addr'])
 					.	"&gt;"
 					. "</noscript>";
 			} else {
@@ -404,7 +406,7 @@
 					.	"//-->"
 					. "</script>"
 					. "<noscript>"
-					.	preg_replace("/@/",":<!--\n-->:AT:<!--\n-->:",$prefs['addr'])
+					.	preg_replace("/@/", ":<!--\n-->:AT:<!--\n-->:", $prefs['addr'])
 					. "</noscript>";
 			}
 		}
