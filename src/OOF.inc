@@ -12,15 +12,15 @@
 	CPL::nice_define("OOF_DEF_HEADER_SIZE", 3);
 
 	class OOF {
-		var $prefs;
+		var $prefs = array();
 		var $obj;
 
-		function OOF($cpl, $type, $prefs = array()) {
+		function OOF(&$cpl, $type, $prefs = array()) {
 			if (!preg_match("/^[a-z]+$/i", $type) ||
 			    !@include_once("OOF/$type.inc"))
 				$cpl->handle_error("Invalid type");
 			$class = "OOF_$type";
-			$this->obj = new $class($this, $prefs);
+			$this->obj = new $class($this, &$cpl);
 			if (is_array($prefs))
 				$this->_loadprefs($prefs);
 		}
@@ -38,7 +38,7 @@
 		function _getprefs($elem, $prefs) {
 			if (!is_array($prefs))
 				$prefs = array();
-			if (in_array($elem, $this->prefs))
+			if (array_key_exists($elem, $this->prefs))
 				return (array_merge($this->prefs[$elem], $prefs));
 			else
 				return ($prefs);
@@ -65,7 +65,8 @@
 
 		function fieldset() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'fieldset'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'fieldset'), $args));
 		}
 
 		function table() {
@@ -74,13 +75,20 @@
 
 			if (is_array($args[0]))
 				$prefs = array_shift($args);
-			return ($this->obj->table_start($prefs) .
-				join('', $args) .
-				$this->table_end());
+			$html = $this->obj->table_start($prefs);
+			foreach ($args as $row) {
+				if (is_array($row))
+					$html .= call_user_func_array(array(&$this->obj,
+					    'table_row'), $row);
+				else
+					$html .= $this->obj->table_row($row);
+			}
+			$html .= $this->table_end();
+			return ($html);
 		}
 
 		function table_end() {
-			return ($this->obj->form_end());
+			return ($this->obj->table_end());
 		}
 
 		function table_start($prefs = NULL) {
@@ -89,22 +97,26 @@
 
 		function table_row() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'table_row'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'table_row'), $args));
 		}
 
 		function table_head() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'table_head'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'table_head'), $args));
 		}
 
 		function p() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'p'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'p'), $args));
 		}
 
 		function link() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'link'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'link'), $args));
 		}
 
 		function hr($prefs = NULL) {
@@ -144,37 +156,44 @@
 
 		function header() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'header'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'header'), $args));
 		}
 
 		function emph() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'emph'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'emph'), $args));
 		}
 
 		function pre() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'pre'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'pre'), $args));
 		}
 
 		function code() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'code'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'code'), $args));
 		}
 
 		function strong() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'strong'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'strong'), $args));
 		}
 
 		function span() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'span'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'span'), $args));
 		}
 
 		function div() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'div'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'div'), $args));
 		}
 
 		function img($prefs) {
@@ -183,7 +202,8 @@
 
 		function email() {
 			$args = func_get_args();
-			call_user_func_array(array(&$this->obj, 'email'), $args);
+			return (call_user_func_array(array(&$this->obj,
+			    'email'), $args));
 		}
 	}
 ?>
