@@ -128,7 +128,7 @@
 				}
 				$html .= $this->_gen('th', $header, $value);
 			}
-			return ($this->gen('tr', array(), $html));
+			return ($this->_gen('tr', array(), $html));
 		}
 
 		function p() {
@@ -215,9 +215,9 @@
 				if ($label && !array_key_exists('id', $prefs))
 					$prefs['id'] = $this->_gen_rand_id();
 
-				$html = $this->gen('input', $prefs, '');
+				$html = $this->_gen('input', $prefs, '');
 				if ($label)
-					$html = $this->gen('label',
+					$html = $this->_gen('label',
 					    array('for' => $prefs['id']),
 					    "$html $label");
 			}
