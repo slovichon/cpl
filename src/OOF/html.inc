@@ -4,7 +4,7 @@
 		var $cpl;
 		var $oof;
 
-		function OOF_HTML($oof, $cpl) {
+		function OOF_html($oof, $cpl) {
 			$this->oof = $oof;
 			$this->cpl = $cpl;
 		}
