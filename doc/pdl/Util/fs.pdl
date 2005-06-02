@@ -2,14 +2,8 @@
 <!-- $Id$ -->
 
 <lib>
-	<name>FSExtensions</name>
+	<name>Util/fs</name>
 	<version>1.0</version>
-	<deps>
-		<dep>
-			<name>CPL</name>
-			<version>1.0</version>
-		</dep>
-	</deps>
 	<desc>
 		This library provides an extension to that of the regular
 		filesystem-related functionalities
