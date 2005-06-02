@@ -3,22 +3,11 @@
 
 <lib>
 	<name>Benchmark</name>
-	<version>1.0</version>
-	<desc>This library contains utilities for benchmarking program execution</desc>
-	<deps>
-		<dep>
-			<name>CPL</name>
-			<version>1.0</version>
-		</dep>
-		<dep>
-			<name>Benchmark</name>
-			<version>1.0</version>
-		</dep>
-	</deps>
+	<desc>This library contains utilities for benchmarking program execution.</desc>
 	<classes>
 		<class>
 			<name>Benchmark</name>
-			<desc>This class can be used to benchmark program execution</desc>
+			<desc>This class benchmarks program execution.</desc>
 			<methods>
 				<method>
 					<name>time</name>
@@ -26,7 +15,7 @@
 						<arg>
 							<name>code</name>
 							<type>string</type>
-							<desc>The code to be executed</desc>
+							<desc>The code to be executed.</desc>
 						</arg>
 						<arg>
 							<name>loops</name>
@@ -34,24 +23,24 @@
 							<desc>The number of times to run the code</desc>
 						</arg>
 					</args>
-					<desc>Time how long it takes a piece of code to run so many times</desc>
+					<desc>Time how long it takes a piece of code to run so many times.</desc>
 					<retval>
-						<type>TimeStamp</type>
-						<desc>The amount of time it took to run the code</desc>
+						<type>Timestamp</type>
+						<desc>The amount of time it took to run the code.</desc>
 					</retval>
 				</method>
 				<method>
 					<name>start</name>
-					<desc>Start the timer</desc>
+					<desc>Start the timer.</desc>
 				</method>
 				<method>
 					<name>end</name>
 					<desc>
-						End the timer and get the amount of time since the timer was started
+						End the timer and get the amount of time since the timer was started.
 					</desc>
 					<retval>
-						<type>TimeStamp</type>
-						<desc>The amount of time since the timer was started</desc>
+						<type>Timestamp</type>
+						<desc>The amount of time since the timer was started.</desc>
 					</retval>
 				</method>
 			</methods>
