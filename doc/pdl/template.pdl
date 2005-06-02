@@ -1,78 +1,78 @@
 <?xml version="1.0" ?>
 
-<library>
+<lib>
 	<name></name>
 	<version></version>
-	<description>
-	</description>
+	<desc>
+	</desc>
 	<constants>
 		<constant>
 			<name></name>
-			<description></description>
+			<desc></desc>
 		</constant>
 		<constant>
 			<name></name>
-			<description></description>
+			<desc></desc>
 		</constant>
 	</constants>
 	<classes>
 		<class>
 			<name></name>
-			<description></description>
-			<properties>
-				<property>
+			<desc></desc>
+			<props>
+				<prop>
 					<name></name>
 					<type></type>
-					<description>
-					</description>
-				</property>
-				<property>
+					<desc>
+					</des>
+				</prop>
+				<prop>
 					<name></name>
 					<type></type>
-					<description>
-					</description>
-				</property>
-			</properties>
+					<desc>
+					</desc>
+				</prop>
+			</props>
 			<methods>
-				<constructor>
-					<description>
-					</description>
-					<arguments>
-						<argument>
+				<ctor>
+					<desc>
+					</desc>
+					<args>
+						<arg>
 							<name></name>
 							<type></type>
-							<description></description>
-						</argument>
-						<argument>
+							<desc></desc>
+						</arg>
+						<arg>
 							<name></name>
 							<type></type>
-							<description></description>
-						</argument>
-					</arguments>
-				</constructor>
+							<desc></desc>
+						</arg>
+					</args>
+				</ctor>
 				<method>
 					<name></name>
-					<description>
-					</description>
-					<arguments>
-						<argument>
+					<desc>
+					</desc>
+					<args>
+						<arg>
 							<name></name>
 							<type></type>
-							<description>
-							</description>
-						</argument>
-						<argument>
+							<desc>
+							</des>
+						</arg>
+						<arg>
 							<name></name>
 							<type></type>
-							<description>
-							</description>
-						</argument>
-					</arguments>
-					<return-value>
+							<desc>
+							</desc>
+						</arg>
+					</args>
+					<retval>
 						<type></type>
-						<description>
-						</description>
-					</return-value>
+						<desc>
+						</desc>
+					</retval>
 				</method>
 			</methods>
 		</class>
@@ -80,25 +80,26 @@
 	<functions>
 		<function>
 			<name></name>
-			<arguments>
-				<argument>
+			<args>
+				<arg>
 					<name></name>
 					<type></type>
-					<description>
-					</description>
-				</argument><argument>
+					<desc>
+					</desc>
+				</arg>
+				<arg>
 					<name></name>
 					<type></type>
-					<description>
-					</description>
-				</argument>
-			</arguments>
-			<description>
-			</description>
-			<return-value>
+					<desc>
+					</desc>
+				</arg>
+			</args>
+			<desc>
+			</desc>
+			<retval>
 				<type></type>
-				<description></description>
-			</return-value>
+				<desc></desc>
+			</retval>
 		</function>
 	</functions>
-</library>
+</lib>
