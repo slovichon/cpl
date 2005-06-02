@@ -1,46 +1,92 @@
 <?xml version="1.0" ?>
+<!-- $Id$ -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:output indent="yes" />
+<xsl:output indent="yes" method="text" />
 
-<xsl:template match="library">
+<xsl:template match="lib">
+	<xsl:text>
+<![CDATA[
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-                <title>EasyPHP - <?php echo $PAGE["title"]; ?></title>
-                <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-                <meta http-equiv="Content-Style-Type" content="text/css" />
-                <link rel="stylesheet" type="text/css" href="/home/jaredy/sites/easyphp.net/htdocs/styles.css" media="screen" />
-        </head>
-        <body>
-                <div class="layoutSection" style="width:808px; margin:8px; ">
-			<div class="header1">
-				<xsl:value-of select="name" /> - <xsl:value-of select="version" /></div>
-			<p><xsl:value-of select="description" /></p>
+	<head>
+		<title>]]></xsl:text>
+	<xsl:value-of select="lib/name" />
+	<xsl:text><![CDATA[</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<style type="text/css">
+			body {
+				font-family: Tahoma, sans-serif;
+			}
+
+			h2 {
+				color: #336699;
+				border: 1px solid #336699;
+				background-color: #FFFFCC;
+				padding: 3px;
+			}
+
+			.tbl {
+				background-color: #336699;
+				width: 100%;
+			}
+
+			td {
+				background-color: #FFFFFF;
+			}
+
+			th {
+				color: #FFFFFF;
+			}
+
+			.desc {
+				text-align: right;
+				font-weight: bold;
+				background-color: #FFFFCC;
+			}
+
+			.th4 {
+				color: #336699;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>]]></xsl:text>
+	<xsl:value-of select="name" />
+	<xsl:text> - </xsl:text>
+	<xsl:value-of select="version" />
+	<xsl:text><![CDATA[</h1>
+			<p>]]></xsl:text>
+	<xsl:value-of select="desc" />
+	<xsl:text><![CDATA[</p>]]></xsl:text>
 			<xsl:apply-templates select="constants|functions|classes" />
+	<xsl:text><![CDATA[
 		</div>
 	</body>
-</html>
+</html>]]></xsl:text>
 </xsl:template>
 
 <xsl:template match="constants">
-	<div class="header2">Constants</div>
+	<xsl:text><![CDATA[
+	<h2>Constants</h2>
 	<p>This library defines the following constants.</p>
-	<table cellspacing="1" cellpadding="3" border="0" bgcolor="#000033" width="95%" align="center">
+	<table cellspacing="1" cellpadding="3" border="0">
 		<tr>
-			<th width="10%">Name</th>
+			<th>Name</th>
 			<th>Description</th>
-		</tr>
+		</tr>]]></xsl:text>
 	<xsl:for-each select="constant">
 		<tr>
 			<td class="data{((position() - 1) mod 2) + 1}"><tt><xsl:value-of select="name" /></tt></td>
-			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="description" /></td>
+			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="desc" /></td>
 		</tr>
 	</xsl:for-each>
-	</table>
+	<xsl:text><![CDATA[</table>]]></xsl:text>
 </xsl:template>
 
 <xsl:template match="functions">
@@ -55,19 +101,19 @@
 			<td class="desc" width="10%">Prototype:</td>
 			<td class="data{((position() - 1) mod 2) + 1}">
 				<tt>
-				<xsl:value-of select="return-value/type" />
+				<xsl:value-of select="retval/type" />
 				<xsl:text> </xsl:text>
 				<xsl:value-of select="name" />(
-		<xsl:for-each select="arguments/argument">
+		<xsl:for-each select="args/arg">
 				<xsl:value-of select="type" />
 				$<xsl:value-of select="name" />
 			<xsl:if test="position() != last()">,</xsl:if>
 		</xsl:for-each>
 				)</tt></td>
 		</tr>
-		<xsl:if test="count(arguments/argument)">
+		<xsl:if test="count(args/arg)">
 		<tr>
-			<td class="desc" rowspan="{count(arguments/argument)}">Arguments</td>
+			<td class="desc" rowspan="{count(args/arg)}">Arguments</td>
 			<xsl:choose>
 				<xsl:when test="(position() - 1) mod 2">
 					<xsl:call-template name="t_secondrow" />
@@ -80,11 +126,11 @@
 		</xsl:if>
 		<tr>
 			<td class="desc">Description:</td>
-			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="description" /></td>
+			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="desc" /></td>
 		</tr>
 		<tr>
 			<td class="desc">Returns:</td>
-			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="return-value/description" /></td>
+			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="retval/desc" /></td>
 		</tr>
 	</table>
 	<br />
@@ -92,111 +138,148 @@
 </xsl:template>
 
 <xsl:template name="t_firstrow">
-			<xsl:for-each select="arguments/argument">
+	<xsl:for-each select="args/arg">
+		<xsl:text><![CDATA[
 			<td class="data1">
-				<tt>$<xsl:value-of select="name" /></tt> -
-				<xsl:value-of select="description" />
-			</td>
-				<xsl:if test="position() != last()">
-		<xsl:text disable-output-escaping="yes">&lt;/tr&gt;</xsl:text>
-		<xsl:text disable-output-escaping="yes">&lt;tr&gt;</xsl:text>
-				</xsl:if>
-			</xsl:for-each>
+				<tt>$]]></xsl:text>
+		<xsl:value-of select="name" />
+		<xsl:text><![CDATA[</tt> - ]]></xsl:text>
+		<xsl:value-of select="desc" />
+		<xsl:text><![CDATA[</td>]]></xsl:text>
+		<xsl:if test="position() != last()">
+			<xsl:text><![CDATA[</tr>
+		<tr>]]></xsl:text>
+		</xsl:if>
+	</xsl:for-each>
 </xsl:template>
 
 <xsl:template name="t_secondrow">
-			<xsl:for-each select="arguments/argument">
+	<xsl:for-each select="args/arg">
+		<xsl:text><![CDATA[
 			<td class="data2">
-				<tt>$<xsl:value-of select="name" /></tt> -
-				<xsl:value-of select="description" />
-			</td>
-				<xsl:if test="position() != last()">
-		<xsl:text disable-output-escaping="yes">&lt;/tr&gt;</xsl:text>
-		<xsl:text disable-output-escaping="yes">&lt;tr&gt;</xsl:text>
-				</xsl:if>
-			</xsl:for-each>
+				<tt>$]]></xsl:text>
+		<xsl:value-of select="name" />
+		<xsl:text><![CDATA[</tt> - ]]></xsl:text>
+		<xsl:value-of select="desc" />
+		<xsl:text><![CDATA[</td>]]></xsl:text>
+		<xsl:if test="position() != last()">
+			<xsl:text><![CDATA[</tr>]]></xsl:text>
+			<xsl:text><![CDATA[<tr>]]></xsl:text>
+		</xsl:if>
+	</xsl:for-each>
 </xsl:template>
 
 <xsl:template match="classes">
-	<div class="header2">Classes</div>
+	<xsl:text><![CDATA[
+	<h2>Classes</h2>
 	<p>This library defines the following classes.</p>
+	<div style="margin-left: 10px">]]></xsl:text>
 	<xsl:for-each select="class">
-	<div style="width:98%;" class="header3"><xsl:value-of select="name" /></div>
-	<p><xsl:value-of select="description" /></p>
-		<xsl:if test="count(properties/property)">
-	<br/>
-	<table cellspacing="1" cellpadding="3" border="0" bgcolor="#000033" width="95%" align="center">
+		<xsl:text><![CDATA[<h3>]]></xsl:text>
+		<xsl:value-of select="name" />
+		<xsl:text><![CDATA[</h3>
+	<p>]]></xsl:text>
+		<xsl:value-of select="desc" />
+		<xsl:text><![CDATA[</p>]]></xsl:text>
+		<xsl:if test="count(prop/prop)">
+			<xsl:text><![CDATA[<br />
+	<table cellspacing="1" cellpadding="3" border="0" class="tbl">
 		<tr>
 			<th colspan="2">Properties</th>
-		</tr>
-			<xsl:for-each select="properties/property">
+		</tr>]]></xsl:text>
+			<xsl:for-each select="props/prop">
+				<xsl:text><![CDATA[
 		<tr>
-			<td class="data{((position() - 1) mod 2) + 1}">
-				<tt><xsl:value-of select="type" />
-				$obj-&gt;<xsl:value-of select="name" /></tt> - 
-				<xsl:value-of select="description" />
-			</td>
-		</tr>
+			<td class="data]]></xsl:text>
+				<xsl:value-of select="((position() - 1) mod 2) + 1" />
+				<xsl:text><![CDATA[">
+				<tt>]]></xsl:text>
+				<xsl:value-of select="type" />
+				<xsl:text>$obj-&gt;</xsl:text>
+				<xsl:value-of select="name" />
+				<xsl:text><![CDATA[</tt> - ]]></xsl:text>
+				<xsl:value-of select="desc" />
+				<xsl:text><![CDATA[</td>
+		</tr>]]></xsl:text>
 			</xsl:for-each>
-	</table>
-		</xsl:if>
-		<xsl:if test="count(methods/method)">
+		<xsl:text><![CDATA[
+	</table>]]></xsl:text>
+	</xsl:if>
+	<xsl:if test="count(methods/method)">
+		<xsl:text><![CDATA[
 	<br/>
-	<table cellspacing="1" cellpadding="3" border="0" bgcolor="#000033" width="95%" align="center">
+	<table cellspacing="1" cellpadding="3" border="0" class="tbl">
 		<tr>
 			<th colspan="2">Methods</th>
-		</tr>
-			<xsl:for-each select="methods/method|methods/constructor">
+		</tr>]]></xsl:text>
+			<xsl:for-each select="methods/method|methods/ctor">
+				<xsl:text><![CDATA[
 		<tr>
-			<td class="th4" colspan="2">
+			<td class="th4" colspan="2">]]></xsl:text>
 				<xsl:choose>
-					<xsl:when test="name() = 'constructor'">
-						(Constructor)
+					<xsl:when test="name() = 'ctor'">
+						<xsl:text>(Constructor)</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="name" />
 					</xsl:otherwise>
 				</xsl:choose>
-			</td>
+				<xsl:text><![CDATA[</td>
 		</tr>
 		<tr>
 			<td class="desc" width="10%">Prototype:</td>
-			<td class="data{((position() - 1) mod 2) + 1}">
-				<tt>
+			<td class="data]]></xsl:text>
+				<xsl:value-of select="((position() - 1) mod 2) + 1" />
+				<xsl:text><![CDATA[">
+				<tt>]]></xsl:text>
 				<xsl:choose>
-					<xsl:when test="name() = 'constructor'">
-						new <xsl:value-of select="../../name" />(
-						<xsl:for-each select="arguments/argument">
+					<xsl:when test="name() = 'ctor'">
+						<xsl:text>new </xsl:text>
+						<xsl:value-of select="../../name" />
+						<xsl:text>(</xsl:text>
+						<xsl:for-each select="args/arg">
 							<xsl:value-of select="type" />
-							$<xsl:value-of select="name" />
-							<xsl:if test="position() != last()">,</xsl:if>
+							<xsl:text>$</xsl:text>
+							<xsl:value-of select="name" />
+							<xsl:if test="position() != last()">
+								<xsl:text>,</xsl:text>
+							</xsl:if>
 						</xsl:for-each>
-						)
+						<xsl:text>)</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:choose>
-							<xsl:when test="return-value">
-								<xsl:value-of select="return-value/type" />
+							<xsl:when test="retval">
+								<xsl:value-of select="retval/type" />
 							</xsl:when>
 							<xsl:otherwise>
-								void
+								<xsl:text>void</xsl:text>
 							</xsl:otherwise>
 						</xsl:choose>
-						$obj-&gt;<xsl:value-of select="name" />(
-						<xsl:for-each select="arguments/argument">
+						<xsl:text> $obj-&gt;</xsl:text>
+						<xsl:value-of select="name" />
+						<xsl:text>(</xsl:text>
+						<xsl:for-each select="args/arg">
 							<xsl:value-of select="type" />
-							$<xsl:value-of select="name" />
-							<xsl:if test="position() != last()">,</xsl:if>
+							<xsl:text> $</xsl:text>
+							<xsl:value-of select="name" />
+							<xsl:if test="position() != last()">
+								<xsl:text>, </xsl:text>
+							</xsl:if>
 						</xsl:for-each>
-						)
+						<xsl:text>)</xsl:text>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:text><![CDATA[
 				</tt>
 			</td>
-		</tr>
-				<xsl:if test="count(arguments/argument)">
+		</tr>]]></xsl:text>
+				<xsl:if test="count(args/arg)">
+					<xsl:text><![CDATA[
 		<tr>
-			<td class="desc" rowspan="{count(arguments/argument)}">Arguments:</td>
+			<td class="desc" rowspan="]]></xsl:text>
+					<xsl:value-of select="count(args/arg)" />
+					<xsl:text><![CDATA[">Arguments:</td>]]></xsl:text>
 					<xsl:choose>
 						<xsl:when test="(position() - 1) mod 2">
 							<xsl:call-template name="t_secondrow" />
@@ -205,20 +288,31 @@
 							<xsl:call-template name="t_firstrow" />
 						</xsl:otherwise>
 					</xsl:choose>
-		</tr>
+					<xsl:text><![CDATA[
+		</tr>]]></xsl:text>
 				</xsl:if>
+				<xsl:text><![CDATA[
 		<tr>
 			<td class="desc">Description:</td>
-			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="description" /></td>
-		</tr>
-				<xsl:if test="return-value">
+			<td class="data]]></xsl:text>
+				<xsl:value-of select="((position() - 1) mod 2) + 1" />
+				<xsl:text><![CDATA[">]]></xsl:text>
+				<xsl:value-of select="desc" />
+				<xsl:text><![CDATA[</td>
+		</tr>]]></xsl:text>
+				<xsl:if test="retval">
+					<xsl:text><![CDATA[
 		<tr>
 			<td class="desc">Returns:</td>
-			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="return-value/description" /></td>
-		</tr>
+			<td class="data]]></xsl:text>
+					<xsl:value-of select="((position() - 1) mod 2) + 1" />
+					<xsl:text><![CDATA[">]]></xsl:text>
+					<xsl:value-of select="retval/desc" />
+					<xsl:text><![CDATA[</td>
+		</tr>]]></xsl:text>
 				</xsl:if>
 			</xsl:for-each>
-	</table>
+			<xsl:text><![CDATA[</table>]]></xsl:text>
 		</xsl:if>
 	</xsl:for-each>
 </xsl:template>
