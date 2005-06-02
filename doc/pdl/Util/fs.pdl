@@ -1,66 +1,73 @@
 <?xml version="1.0" ?>
+<!-- $Id$ -->
 
-<library>
+<lib>
 	<name>FSExtensions</name>
 	<version>1.0</version>
-	<dependencies>
-		<dependency>
+	<deps>
+		<dep>
 			<name>CPL</name>
 			<version>1.0</version>
-		</dependency>
-	</dependencies>
-	<description>This library provides an extension to that of the regular filesystem-related functionalities</description>
+		</dep>
+	</deps>
+	<desc>
+		This library provides an extension to that of the regular
+		filesystem-related functionalities
+	</desc>
 	<functions>
 		<function>
 			<name>fgetln</name>
-			<arguments>
-				<argument>
+			<args>
+				<arg>
 					<name>file_pointer</name>
 					<type>resource</type>
-					<description>An open and readable file pointer</description>
-				</argument>
-			</arguments>
-			<description>
+					<desc>An open and readable file pointer</desc>
+				</arg>
+			</args>
+			<desc>
 				This function reads successive characters in from a file pointer until it comes
 				across a newline, succeeding in returning the next line of data from a file
-			</description>
-			<return-value>
+			</desc>
+			<retval>
 				<type>string</type>
-				<description>The next line from the file</description>
-			</return-value>
+				<desc>The next line from the file</desc>
+			</retval>
 		</function>
 		<function>
 			<name>readdira</name>
-			<arguments>
-				<argument>
+			<args>
+				<arg>
 					<name>dir_pointer</name>
 					<type>resource</type>
-					<descriptio>The directory pointer from which to read filenames</description>
-				</argument>
-			</arguments>
-			<description>This function reads all the filenames in a directory into an array and returns it</description>
-			<return-value>
+					<desc>The directory pointer from which to read filenames</desc>
+				</arg>
+			</args>
+			<desc>
+				This function reads all the filenames in a directory into an array and
+				returns it
+			</desc>
+			<retval>
 				<type>array</type>
-				<description>An array of the filenames in a directory</description>
-			</return-value>
+				<desc>An array of the filenames in a directory</desc>
+			</retval>
 		</function>
 		<function>
 			<name>dirsize</name>
-			<arguments>
-				<argument>
+			<args>
+				<arg>
 					<name>dir</name>
 					<type>string</type>
-					<description>The directory of which to calculate the size</description>
-				</argument>
-			</arguments>
-			<description>
+					<desc>The directory of which to calculate the size</desc>
+				</arg>
+			</args>
+			<desc>
 				Attempts to calculate the size of a directory and all nested directories within this
 				particular directory
-			</description>
-			<return-value>
+			</desc>
+			<retval>
 				<type>int</type>
-				<description>The size of the directory in bytes</description>
-			</return-value>
+				<desc>The size of the directory in bytes</desc>
+			</retval>
 		</function>
 	</functions>
-</library>
+</lib>

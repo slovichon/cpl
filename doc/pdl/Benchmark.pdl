@@ -1,59 +1,60 @@
 <?xml version="1.0" ?>
+<!-- $Id$ -->
 
-<library>
+<lib>
 	<name>Benchmark</name>
 	<version>1.0</version>
-	<description>This library contains utilities for benchmarking program execution</description>
-	<dependencies>
-		<dependency>
+	<desc>This library contains utilities for benchmarking program execution</desc>
+	<deps>
+		<dep>
 			<name>CPL</name>
 			<version>1.0</version>
-		</dependency>
-		<dependency>
+		</dep>
+		<dep>
 			<name>Benchmark</name>
 			<version>1.0</version>
-		</dependency>
-	</dependencies>
+		</dep>
+	</deps>
 	<classes>
 		<class>
 			<name>Benchmark</name>
-			<description>This class can be used to benchmark program execution</description>
+			<desc>This class can be used to benchmark program execution</desc>
 			<methods>
 				<method>
 					<name>time</name>
-					<arguments>
-						<argument>
+					<args>
+						<arg>
 							<name>code</name>
 							<type>string</type>
-							<description>The code to be executed</description>
-						</argument>
-						<argument>
+							<desc>The code to be executed</desc>
+						</arg>
+						<arg>
 							<name>loops</name>
 							<type>int</type>
-							<description>The number of times to run the code</description>
-						</argument>
-					</arguments>
-					<description>Time how long it takes a piece of code to run so many times</description>
-					<return-value>
+							<desc>The number of times to run the code</desc>
+						</arg>
+					</args>
+					<desc>Time how long it takes a piece of code to run so many times</desc>
+					<retval>
 						<type>TimeStamp</type>
-						<description>The amount of time it took to run the code</description>
-					</return-value>
+						<desc>The amount of time it took to run the code</desc>
+					</retval>
 				</method>
 				<method>
 					<name>start</name>
-					<description>Start the timer</description>
+					<desc>Start the timer</desc>
 				</method>
 				<method>
 					<name>end</name>
-					<description>
+					<desc>
 						End the timer and get the amount of time since the timer was started
-					</description>
-					<return-value>
+					</desc>
+					<retval>
 						<type>TimeStamp</type>
-						<description>The amount of time since the timer was started</description>
-					</return-value>
+						<desc>The amount of time since the timer was started</desc>
+					</retval>
 				</method>
 			</methods>
 		</class>
 	</classes>
-</library>
+</lib>
