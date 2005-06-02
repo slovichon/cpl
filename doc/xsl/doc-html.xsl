@@ -13,8 +13,8 @@
 
 <html xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>]]></xsl:text>
-	<xsl:value-of select="lib/name" />
+		<title>CPL - ]]></xsl:text>
+	<xsl:value-of select="name" />
 	<xsl:text><![CDATA[</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<meta http-equiv="Content-Style-Type" content="text/css" />
@@ -53,13 +53,19 @@
 				color: #336699;
 				font-weight: bold;
 			}
+
+			.data1 {
+				background-color: #EEEEEE;
+			}
+
+			.data2 {
+				background-color: #EEEEFF;
+			}
 		</style>
 	</head>
 	<body>
-		<h1>]]></xsl:text>
+		<h1>CPL - ]]></xsl:text>
 	<xsl:value-of select="name" />
-	<xsl:text> - </xsl:text>
-	<xsl:value-of select="version" />
 	<xsl:text><![CDATA[</h1>
 			<p>]]></xsl:text>
 	<xsl:value-of select="desc" />
@@ -75,16 +81,25 @@
 	<xsl:text><![CDATA[
 	<h2>Constants</h2>
 	<p>This library defines the following constants.</p>
-	<table cellspacing="1" cellpadding="3" border="0">
+	<table cellspacing="1" cellpadding="3" border="0" class="tbl">
 		<tr>
 			<th>Name</th>
 			<th>Description</th>
 		</tr>]]></xsl:text>
 	<xsl:for-each select="constant">
+		<xsl:text><![CDATA[
 		<tr>
-			<td class="data{((position() - 1) mod 2) + 1}"><tt><xsl:value-of select="name" /></tt></td>
-			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="desc" /></td>
-		</tr>
+			<td class="data]]></xsl:text>
+		<xsl:value-of select="((position() - 1) mod 2) + 1" />
+		<xsl:text><![CDATA["><tt>]]></xsl:text>
+		<xsl:value-of select="name" />
+		<xsl:text><![CDATA[</tt></td>
+			<td class="data]]></xsl:text>
+		<xsl:value-of select="((position() - 1) mod 2) + 1" />
+		<xsl:text><![CDATA[">]]></xsl:text>
+		<xsl:value-of select="desc" />
+		<xsl:text><![CDATA[</td>
+		</tr>]]></xsl:text>
 	</xsl:for-each>
 	<xsl:text><![CDATA[</table>]]></xsl:text>
 </xsl:template>
@@ -172,12 +187,12 @@
 <xsl:template match="classes">
 	<xsl:text><![CDATA[
 	<h2>Classes</h2>
-	<p>This library defines the following classes.</p>
-	<div style="margin-left: 10px">]]></xsl:text>
+	<p>This library defines the following classes.</p>]]></xsl:text>
 	<xsl:for-each select="class">
 		<xsl:text><![CDATA[<h3>]]></xsl:text>
 		<xsl:value-of select="name" />
 		<xsl:text><![CDATA[</h3>
+	<div style="margin-left: 10px">
 	<p>]]></xsl:text>
 		<xsl:value-of select="desc" />
 		<xsl:text><![CDATA[</p>]]></xsl:text>
@@ -236,16 +251,6 @@
 					<xsl:when test="name() = 'ctor'">
 						<xsl:text>new </xsl:text>
 						<xsl:value-of select="../../name" />
-						<xsl:text>(</xsl:text>
-						<xsl:for-each select="args/arg">
-							<xsl:value-of select="type" />
-							<xsl:text>$</xsl:text>
-							<xsl:value-of select="name" />
-							<xsl:if test="position() != last()">
-								<xsl:text>,</xsl:text>
-							</xsl:if>
-						</xsl:for-each>
-						<xsl:text>)</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:choose>
@@ -258,18 +263,18 @@
 						</xsl:choose>
 						<xsl:text> $obj-&gt;</xsl:text>
 						<xsl:value-of select="name" />
-						<xsl:text>(</xsl:text>
-						<xsl:for-each select="args/arg">
-							<xsl:value-of select="type" />
-							<xsl:text> $</xsl:text>
-							<xsl:value-of select="name" />
-							<xsl:if test="position() != last()">
-								<xsl:text>, </xsl:text>
-							</xsl:if>
-						</xsl:for-each>
-						<xsl:text>)</xsl:text>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:text>(</xsl:text>
+				<xsl:for-each select="args/arg">
+					<xsl:value-of select="type" />
+					<xsl:text> $</xsl:text>
+					<xsl:value-of select="name" />
+					<xsl:if test="position() != last()">
+						<xsl:text>, </xsl:text>
+					</xsl:if>
+				</xsl:for-each>
+				<xsl:text>)</xsl:text>
 				<xsl:text><![CDATA[
 				</tt>
 			</td>
