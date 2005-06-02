@@ -128,7 +128,7 @@
 		<xsl:text>(</xsl:text>
 		<xsl:for-each select="args/arg">
 			<xsl:value-of select="type" />
-			<xsl:text>$</xsl:text>
+			<xsl:text> $</xsl:text>
 			<xsl:value-of select="name" />
 			<xsl:if test="position() != last()">, </xsl:if>
 		</xsl:for-each>
