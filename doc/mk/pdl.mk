@@ -20,16 +20,16 @@ doc-html: ${HTML}
 	${XSLTPROC} -o ${.TARGET} ${ADJSYSROOT}/doc/xsl/doc-html.xsl ${.IMPSRC}
 
 obj: obj-recursive
-	mkdir ${OBJDIR}
+	@mkdir ${OBJDIR}
 
 clean: clean-recursive
 	rm -f ${HTML}
 
 all-recursive clean-recursive obj-recursive:
-	@for i in ${SUBDIRS}; do					\
-		echo "==> $$i";						\
-		(cd ${.CURDIR}/$$i && make ${.TARGET:S/-recursive//});	\
+	@for i in ${SUBDIRS}; do						\
+		echo "==> $$i";							\
+		(cd ${.CURDIR}/$$i && ${.MAKE} ${.TARGET:S/-recursive//});	\
 	done
-	@if [ -n "${SUBDIRS}" ]; then					\
-		echo "<==";						\
+	@if [ -n "${SUBDIRS}" ]; then						\
+		echo "<==";							\
 	fi
