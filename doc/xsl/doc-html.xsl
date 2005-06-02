@@ -105,30 +105,41 @@
 </xsl:template>
 
 <xsl:template match="functions">
-	<div class="header2">Functions</div>
-	<p>This library defines the following functions.</p>
+	<xsl:text><![CDATA[
+	<h2>Functions</h2>
+	<p>This library defines the following functions.</p>]]></xsl:text>
 	<xsl:for-each select="function">
-	<table cellspacing="1" cellpadding="3" border="0" bgcolor="#000033" width="95%" align="center">
+		<xsl:text><![CDATA[
+	<table cellspacing="1" cellpadding="3" border="0" class="tbl">
 		<tr>
-			<th colspan="2"><xsl:value-of select="name" /></th>
+			<th colspan="2">]]></xsl:text>
+		<xsl:value-of select="name" />
+		<xsl:text><![CDATA[</th>
 		</tr>
 		<tr>
 			<td class="desc" width="10%">Prototype:</td>
-			<td class="data{((position() - 1) mod 2) + 1}">
-				<tt>
-				<xsl:value-of select="retval/type" />
-				<xsl:text> </xsl:text>
-				<xsl:value-of select="name" />(
+			<td class="data]]></xsl:text>
+		<xsl:value-of select="((position() - 1) mod 2) + 1" />
+		<xsl:text><![CDATA[">
+				<tt>]]></xsl:text>
+		<xsl:value-of select="retval/type" />
+		<xsl:text> </xsl:text>
+		<xsl:value-of select="name" />
+		<xsl:text>(</xsl:text>
 		<xsl:for-each select="args/arg">
-				<xsl:value-of select="type" />
-				$<xsl:value-of select="name" />
-			<xsl:if test="position() != last()">,</xsl:if>
+			<xsl:value-of select="type" />
+			<xsl:text>$</xsl:text>
+			<xsl:value-of select="name" />
+			<xsl:if test="position() != last()">, </xsl:if>
 		</xsl:for-each>
-				)</tt></td>
-		</tr>
+		<xsl:text><![CDATA[)</tt></td>
+		</tr>]]></xsl:text>
 		<xsl:if test="count(args/arg)">
+			<xsl:text><![CDATA[
 		<tr>
-			<td class="desc" rowspan="{count(args/arg)}">Arguments</td>
+			<td class="desc" rowspan="]]></xsl:text>
+			<xsl:value-of select="count(args/arg)" />
+			<xsl:text><![CDATA[">Arguments</td>]]></xsl:text>
 			<xsl:choose>
 				<xsl:when test="(position() - 1) mod 2">
 					<xsl:call-template name="t_secondrow" />
@@ -137,18 +148,27 @@
 					<xsl:call-template name="t_firstrow" />
 				</xsl:otherwise>
 			</xsl:choose>
-		</tr>
+			<xsl:text><![CDATA[</tr>]]></xsl:text>
 		</xsl:if>
+		<xsl:text><![CDATA[
 		<tr>
 			<td class="desc">Description:</td>
-			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="desc" /></td>
+			<td class="data]]></xsl:text>
+		<xsl:value-of select="((position() - 1) mod 2) + 1" />
+		<xsl:text><![CDATA[">]]></xsl:text>
+		<xsl:value-of select="desc" />
+		<xsl:text><![CDATA[</td>
 		</tr>
 		<tr>
 			<td class="desc">Returns:</td>
-			<td class="data{((position() - 1) mod 2) + 1}"><xsl:value-of select="retval/desc" /></td>
+			<td class="data]]></xsl:text>
+		<xsl:value-of select="((position() - 1) mod 2) + 1" />
+		<xsl:text><![CDATA[">]]></xsl:text>
+		<xsl:value-of select="retval/desc" />
+		<xsl:text><![CDATA[</td>
 		</tr>
 	</table>
-	<br />
+	<br />]]></xsl:text>
 	</xsl:for-each>
 </xsl:template>
 
