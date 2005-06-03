@@ -3,7 +3,6 @@
 
 <lib>
 	<name>Timestamp</name>
-	<version>1.5</version>
 	<desc>This library contains utilies for each date and time manipulation</desc>
 	<classes>
 		<class>

@@ -3,7 +3,6 @@
 
 <lib>
 	<name>Util/fs</name>
-	<version>1.0</version>
 	<desc>
 		This library provides an extension to that of the regular
 		filesystem-related functionalities
