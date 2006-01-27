@@ -69,7 +69,7 @@
 			if (@$saved[$this->link_id] == $new_db)
 				return;
 			if (!@mysql_select_db($new_db, $this->link_id))
-				$this->handle_error("Cannot select database; database: $database");
+				$this->handle_error("Cannot select database; database: $new_db");
 			$saved[$this->link_id] = $new_db;
 		}
 
