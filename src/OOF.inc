@@ -20,7 +20,7 @@
 			    !@include_once("OOF/$type.inc"))
 				$cpl->handle_error("Invalid type");
 			$class = "OOF_$type";
-			$this->obj = new $class($this, &$cpl);
+			$this->obj = new $class($this, $cpl);
 			if (is_array($prefs))
 				$this->_loadprefs($prefs);
 		}
