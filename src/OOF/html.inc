@@ -39,7 +39,6 @@
 
 		function form_start($prefs) {
 			/* Initiate default values */
-/*
 			if (!array_key_exists("action", $prefs))
 				$prefs["action"] = $_SERVER["PHP_SELF"];
 
@@ -48,7 +47,7 @@
 
 			if (!array_key_exists("enctype", $prefs))
 				$prefs["enctype"] = "application/x-www-form-urlencoded";
-*/
+
 			return ($this->_start('form', $prefs));
 		}
 
@@ -226,14 +225,9 @@
 		}
 
 		function _gen_rand_id() {
-			static $used = array();
+			static $id = 0;
 
-			$id = "";
-			do {
-				$id = "OOFInput" . md5(uniqid("OOFInput", TRUE));
-			} while (in_array($id, $used));
-			array_push($used, $id);
-			return ($id);
+			return (sprintf("oofid%06d", $id++));
 		}
 
 		function br() {
