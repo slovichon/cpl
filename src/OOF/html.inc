@@ -339,7 +339,7 @@
 
 			if (is_array($args[0]))
 				$prefs = array_shift($args);
-			return ($this->_gen('span', $prefs, join('', $args)));
+			return ($this->_gen('div', $prefs, join('', $args)));
 		}
 
 		function img($prefs) {
