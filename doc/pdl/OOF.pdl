@@ -1,0 +1,668 @@
+<?xml version="1.0" ?>
+
+<lib>
+	<name>OOF</name>
+	<desc>
+		This library provides utilities for output formatting.
+	</desc>
+	<constants>
+		<constant>
+			<name>OOF_LIST_UN</name>
+			<desc>Denotes an unordered list.</desc>
+		</constant>
+		<constant>
+			<name>OOF_LIST_OD</name>
+			<desc>Denotes an ordered list.</desc>
+		</constant>
+	</constants>
+	<classes>
+		<class>
+			<name>OOF</name>
+			<desc>This class provides an interface to output formatting</desc>
+			<methods>
+				<method>
+					<name>form</name>
+					<desc>
+						This method is a wrapper around the OOF::form_start() and
+						OOF::form_end() methods which generate a medium for submitting
+						data on the device receiving output
+					</desc>
+					<args>
+						<arg>
+							<name>prefs</name>
+							<type>array</type>
+							<desc>
+								This optional parameter is an array containing
+								key/value pairs for specifying form preferences
+
+								Possible key/value pairs are:
+
+								action - the URI to which data should be submitted -
+								defaults to the current page - other possible
+								values include any URI
+
+								method - how the data should be submitted to the URI -
+								defaults to &quot;post&quot; - other possible values
+								include &quot;get&quot;
+
+								enctype - the way submitted data should be encoded -
+								defaults to &quot;x-www-form-urlencoded&quot; - other
+								possible values include &quot;multipart/form-data&quot;
+							</desc>
+						</arg>
+						<arg>
+							<name>data</name>
+							<type>string</type>
+							<desc>
+								This and all other subsequent arguments are simply
+								returned as the value of the form object. All form
+								input fields should be placed within these arguments
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of a form
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>form_start</name>
+					<desc>
+						Start a form
+					</desc>
+					<args>
+						<arg>
+							<name>prefs</name>
+							<type>array</type>
+							<desc>
+								This optional parameter is an array containing
+								key/value pairs for specifying form preferences
+
+								Possible key/value pairs are:
+
+								action - the URI to which data should be submitted -
+								defaults to the current page - other possible
+								values include any URI
+
+								method - how the data should be submitted to the URI -
+								defaults to &quot;post&quot; - other possible values
+								include &quot;get&quot;
+
+								enctype - the way submitted data should be encoded -
+								defaults to &quot;x-www-form-urlencoded&quot; - other
+								possible values include &quot;multipart/form-data&quot;
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the beginning of a form
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>form_end</name>
+					<desc>
+						End a form
+					</desc>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the of a form
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>table</name>
+					<desc>
+						This method is a wrapper around the OOF::table_start() and
+						OOF::table_end() methods which generates output for a medium
+						for which to display tabular data
+					</desc>
+					<args>
+						<arg>
+							<name>prefs</name>
+							<type>array</type>
+							<desc>
+								This optional parameter contains an associative
+								array of key/value pairs describing table
+								properties
+
+								Possible key/value pairs include:
+
+								cellspacing - The spacing in pixels between table cells -
+								defaults to zero
+
+								cellpadding - The spacing in pixels lining table cells before
+								cell data starts - defaults to zero
+
+								border - The spacing in pixels of the outer-lining of the
+								table offset from other elements in the output - defaults
+								to zero
+
+								Other values specified in this array will specified in
+								output as well
+							</desc>
+						</arg>
+						<arg>
+							<name>data</name>
+							<type>string</type>
+							<desc>
+								This and all other subsequent arguments to this
+								method are simply used as the content of the
+								table, expected to be in proper table formatting,
+								which can be obtained from methods such as
+								OOF::table_row() and OOF::table_head()
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of a table
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>table_start</name>
+					<desc>
+						Star a end
+					</desc>
+					<args>
+						<arg>
+							<name>prefs</name>
+							<type>array</type>
+							<desc>
+								This optional parameter contains an associative
+								array of key/value pairs describing table
+								properties
+
+								Possible key/value pairs include:
+
+								cellspacing - The spacing in pixels between table cells -
+								defaults to zero
+
+								cellpadding - The spacing in pixels lining table cells before
+								cell data starts - defaults to zero
+
+								border - The spacing in pixels of the outer-lining of the
+								table offset from other elements in the output - defaults
+								to zero
+
+								Other values specified in this array will specified in
+								output as well
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the beginning of a table
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>table_end</name>
+					<desc>
+						End a table
+					</desc>
+					<retval>
+						<type>string</type>
+						<desc>
+						The generated output of the ending of a table
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>table_row</name>
+					<desc>
+						Add a table row to a table
+					</desc>
+					<args>
+						<arg>
+							<name>row</name>
+							<type>mixed</type>
+							<desc>
+								This and all subsequent arguments can be either strings
+								containing a particular cell's contents or an array containing
+								cell preferences, including contents. Specifying the content
+								value of a cell is denoted by the 'value' key from the
+								associative array passed as an argument to this method.
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the table row
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>table_head</name>
+					<desc>
+						Add a table row of headers to a table
+					</desc>
+					<args>
+						<arg>
+							<name>row</name>
+							<type>mixed</type>
+							<desc>
+								This and all subsequent arguments can be either strings
+								containing a particular header cell's contents or an array
+								containing header cell preferences, included contents,
+								denoted by the associative array index 'value'.
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of a table row of headers
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>p</name>
+					<desc>
+						Generate a paragraph
+					</desc>
+					<args>
+						<arg>
+							<name>prefs</name>
+							<type>array</type>
+							<desc>
+								This optional argument contains an associative array of
+								paragraph preferences
+							</desc>
+						</arg>
+						<arg>
+							<name>value</name>
+							<type>string</type>
+							<desc>
+								This and all of its subsequent arguments are concatenated
+								together to form the content of the paragraph
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of a paragraph
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>link</name>
+					<desc>
+						Generate a hyperlink linking two electronic documents
+					</desc>
+					<args>
+						<arg>
+							<name>prefs</name>
+							<type>array</type>
+							<desc>
+								This associative array contains preferences for the hyperlink,
+								with the special index 'value' denoted the value of the
+								hyperlink (the `link text', as commonly referred to)
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the hyperlink
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>link</name>
+					<desc>
+						Generate a hyperlink linking two electronic documents
+					</desc>
+					<args>
+						<arg>
+							<name>value</name>
+							<type>string</type>
+							<desc>
+								The value of the hyperlink (the `link text', as commonly
+								referred to)
+							</desc>
+						</arg>
+						<arg>
+							<name>href</name>
+							<type>string</type>
+							<desc>
+								The address of the document to which this hyperlink points
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the hyperlink
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>hr</name>
+					<desc>
+						Generate a horizontal ruler
+					</desc>
+					<args>
+						<arg>
+							<name>prefs</name>
+							<type>array</type>
+							<desc>
+								This optional argument contains preferences for the horizontal
+								ruler
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the horizontal ruler
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>input</name>
+					<desc>
+						Generate an input form field for user input/interaction
+					</desc>
+					<args>
+						<arg>
+							<name>prefs</name>
+							<type>array</type>
+							<desc>
+								This argument contains preferences for the user
+								input field. There are three main types, as
+								specified by the `type' name/value pair:
+
+								`select' is used for choosing a value from a list
+								of options, denoted by the `options' name/value
+								pair, should itself should contain an array
+								of name/value pairs for option labels and their
+								values.
+
+								`textarea' is used for gathering larger amounts
+								of text
+
+								Other fields include `password' and `text,' among
+								others
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the user input field
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>br</name>
+					<desc>
+						Generate a line break
+					</desc>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the line break
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>list_start</name>
+					<desc>
+						Generate the beginning of a list
+					</desc>
+					<args>
+						<arg>
+							<name>type</name>
+							<type>int</type>
+							<desc>
+								The type of list. Values include `OOF_LIST_UN' to
+								create an unordered list and `OOF_LIST_OD' to
+								create an ordered list of items
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the beginning of the list
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>list_end</name>
+					<desc>
+						Generate the end of a list
+					</desc>
+					<args>
+						<arg>
+							<name>type</name>
+							<type>int</type>
+							<desc>
+								The type of list. Values include `OOF_LIST_UN' to
+								create an unordered list and `OOF_LIST_OD' to
+								create an ordered list of items
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the end of the list
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>list_item</name>
+					<desc>
+						Generate the output for a list element
+					</desc>
+					<args>
+						<arg>
+							<name>item</name>
+							<type>string</type>
+							<desc>
+								This value is used for the content of the list
+								item
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the list item
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>oof_list</name>
+					<desc>
+						This method is internally uses list_start() and list_end() to
+						encapsulate and ease the process of generating lists. It has the
+						prefix `oof' to avoid conflicts with the native PHP built-in
+						list().
+					</desc>
+					<args>
+						<arg>
+							<name>type</name>
+							<type>int</type>
+							<desc>
+								The type of list. Values include `OOF_LIST_UN' to
+								create an unordered list and `OOF_LIST_OD' to
+								create an ordered list of items
+							</desc>
+						</arg>
+						<arg>
+							<name>string</name>
+							<type>item</type>
+							<desc>
+								This and all other subsequent arguments are
+								used as individual list items. Each argument
+								is internally passed to the method list_item().
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the list
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>header</name>
+					<desc>
+						Generate a title header
+					</desc>
+					<args>
+						<arg>
+							<name>header</name>
+							<type>string</type>
+							<desc>
+								The content of the title header
+							</desc>
+						</arg>
+						<arg>
+							<name>degree</name>
+							<type>int</type>
+							<desc>
+								The degree of importance of the title header
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the title header
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>header</name>
+					<desc>
+						Generate a title header
+					</desc>
+					<args>
+						<arg>
+							<name>prefs</name>
+							<type>array</type>
+							<desc>
+								This argument contains an array of name/value pairs
+								corresponding to title header preferences. The
+								`value' key corresponds to the title header value
+								and the `size' key corresponds to the title header
+								degree of importance
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the title header
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>emph</name>
+					<desc>
+						Generate a range of emphasized output
+					</desc>
+					<args>
+						<arg>
+							<name>str</name>
+							<type>string</type>
+							<desc>
+								This and all other subsequent arguments are
+								concatenated together and is used as the value
+								of output to emphasize
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the range of emphasized output
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>pre</name>
+					<desc>
+						Generate a range of preformatted text
+					</desc>
+					<args>
+						<arg>
+							<name>str</name>
+							<type>string</type>
+							<desc>
+								This argument is used as the value of the range
+								of preformatted text
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the range of preformatted text
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>tt</name>
+					<desc>
+						Generate a range of typed text
+					</desc>
+					<args>
+						<arg>
+							<name>str</name>
+							<type>string</type>
+							<desc>
+								This argument is used as the vlaue of the range
+								of typed text
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the range of typed text
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>strong</name>
+					<desc>
+						Generate a range of strongly-annotated text
+					</desc>
+					<args>
+						<arg>
+							<name>str</name>
+							<type>string</type>
+							<desc>
+								This and all other subsequent arguments are
+								concatenated together and are used as the value
+								of the range of strongly-annotated-text
+							</desc>
+						</arg>
+					</args>
+					<retval>
+						<type>string</type>
+						<desc>
+							The generated output of the range of strongly-annotated text
+						</desc>
+					</retval>
+				</method>
+			</methods>
+		</class>
+	</classes>
+</lib>

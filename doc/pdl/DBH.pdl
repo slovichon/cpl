@@ -1,0 +1,236 @@
+<?xml version="1.0" ?>
+<!-- $Id$ -->
+
+<lib>
+	<name>DBH</name>
+	<desc>
+		This library contains utilities to provide an abstracted layer of database
+		connectivity.
+	</desc>
+	<constants>
+		<constant>
+			<name>DB_NULL</name>
+			<desc>
+				No data is expected to be returned.  In such a query, the number of rows
+				affected by the query is returned.
+			</desc>
+		</constant>
+		<constant>
+			<name>DB_COL</name>
+			<desc>
+				A single column from a single result record is expected and will be returned.
+				Subsequent columns are rows will be ignored.
+			</desc>
+		</constant>
+		<constant>
+			<name>DB_ROW</name>
+			<desc>
+				A single associatively- and numerically-indexed array representing a
+				result record of data is expected and returned from a query.  Subsequent
+				result rows are ignored.
+			</desc>
+		</constant>
+		<constant>
+			<name>DB_ROWS</name>
+			<desc>
+				No data is immediately returned.  Instead, the result is saved and expected
+				to be used multiple times with DBH::fetch_row().
+			</desc>
+		</constant>
+		<constant>
+			<name>SQL_REG</name>
+			<desc>
+				Regular escaping should be done to safeguard potentially untrusted
+				data into an SQL query.
+			</desc>
+		</constant>
+		<constant>
+			<name>SQL_WILD</name>
+			<desc>
+				Wildcard escaping should be done so wildcard characters in the data
+				do not affect wildcard strings the SQL query.
+			</desc>
+		</constant>
+		<constant>
+			<name>SQL_REGEX</name>
+			<desc>
+				Regular-expression escaping should be done so regular-expression
+				metacharacters in the data do not affect a regular expression in
+				the SQL query.
+			</desc>
+		</constant>
+	</constants>
+	<classes>
+		<class>
+			<name>DBH</name>
+			<desc>
+				This class actually does not exist.  This is meant as a general
+				guideline, or virtual class, for other derived DBH classes to implement
+				providing their own compatibility towards the RDBMS to which they
+				interface.  For example, MySQL and PostgreSQL DBH classes exist,
+				providing interfaces to connecting to MySQL and PostgreSQL databases,
+				yet providing a layer of abstraction to try to separate RDBMS-specific code.
+			</desc>
+			<props>
+				<prop>
+					<name>link_id</name>
+					<type>int</type>
+					<desc>Contains the connection identifier to the particular RDBMS server.</desc>
+				</prop>
+				<prop>
+					<name>result_id</name>
+					<type>int</type>
+					<desc>Contains the result identifier for the concurrent SQL query.</desc>
+				</prop>
+			</props>
+			<methods>
+				<ctor>
+					<args>
+						<arg>
+							<name>host</name>
+							<type>string</type>
+							<desc>Hostname of RDBMS server.</desc>
+						</arg>
+						<arg>
+							<name>username</name>
+							<type>string</type>
+							<desc>Username in which to log in with.</desc>
+						</arg>
+						<arg>
+							<name>password</name>
+							<type>string</type>
+							<desc>Password in which to log in with.</desc>
+						</arg>
+						<arg>
+							<name>database</name>
+							<type>string</type>
+							<desc>Initial database to use.</desc>
+						</arg>
+					</args>
+					<desc>Attempts to connect to RDBMS and select the initial database.</desc>
+				</ctor>
+				<method>
+					<name>select_database</name>
+					<args>
+						<arg>
+							<name>database</name>
+							<type>string</type>
+							<desc>New database name.</desc>
+						</arg>
+					</args>
+					<desc>Changes the currently selected database for the connection.</desc>
+				</method>
+				<method>
+					<name>query</name>
+					<args>
+						<arg>
+							<name>sql</name>
+							<type>string</type>
+							<desc>SQL query to be run on the database.</desc>
+						</arg>
+						<arg>
+							<name>type</name>
+							<type>int</type>
+							<desc>
+								Type of return value expected.  Use one of DB_NULL,
+								DB_COL, DB_ROW, or DB_ROWS for this value.
+							</desc>
+						</arg>
+					</args>
+					<desc>Run an SQL statement on the RDBMS and possibly gather result data.</desc>
+					<retval>
+						<type>mixed</type>
+						<desc>
+							Depending on the argued type, this can be a variety of values. For DB_NULL,
+							the number of rows affected by the particular query are returned. For DB_COL,
+							the first column from the first result row from the result returned by the
+							SQL query is returned. For DB_ROW, the first row from the result of the SQL
+							query is returned in an associatively- and numerically-indexed array. And for
+							DB_ROWS, nothing is returned -- to fetch subsequent rows, call
+							DBH::fetch_row().
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>last_insert_id</name>
+					<desc>Returns the unique identifier of the newly-added record.</desc>
+					<retval>
+						<type>int</type>
+						<desc>The unique identifier of the newly-added record.</desc>
+					</retval>
+				</method>
+				<method>
+					<name>num_rows</name>
+					<desc>Get the total number of result rows returned by an SQL query.</desc>
+					<retval>
+						<type>int</type>
+						<desc>The total number of result rows.</desc>
+					</retval>
+				</method>
+				<method>
+					<name>fetch_row</name>
+					<desc>Fetches the next result row from a result</desc>
+					<retval>
+						<type>array</type>
+						<desc>
+							The associatively- and numerically-indexed array of the next result row
+							from an SQL query.
+						</desc>
+					</retval>
+				</method>
+				<method>
+					<name>disconnect</name>
+					<desc>Disconnect from an RDBMS.</desc>
+				</method>
+				<method>
+					<name>handle_error</name>
+					<args>
+						<arg>
+							<name>msg</name>
+							<type>string</type>
+							<desc>A descriptive error message.</desc>
+						</arg>
+					</args>
+					<desc>
+						Throws an error. For the most part, this function is and should just be used
+						internally as it provides extra RDBMS-related information.
+					</desc>
+				</method>
+				<method>
+					<name>prepare_str</name>
+					<args>
+						<arg>
+							<name>str</name>
+							<type>string</type>
+							<desc>The string to be safeguarded.</desc>
+						</arg>
+						<arg>
+							<name>type</name>
+							<type>int</type>
+							<desc>
+								The type of preparation that should be performed on the string.
+								Use one of SQL_REG, SQL_WILD, or SQL_REGEX.
+							</desc>
+						</arg>
+					</args>
+					<desc>
+						Prepare a string to be entered into an SQL query. This function safeguards
+						potentially untrusted input allowing it to be suitable to be entered into a
+						database without any harmful side effects. However, as logically suspected,
+						this is not a cure-all for any security-related issue and should be used
+						to provide an additional layer of security to an application.
+	
+						If SQL_REG is used, regular escaping shall be done on the target string. If
+						SQL_WILD is used, wildcard-escaping shall be done on the target string. If
+						SQL_REGEX is used, regular-expression escaping shall be done on the target
+						string.
+					</desc>
+					<retval>
+						<type>string</type>
+						<desc>The prepared string, ready for SQL query deployment.</desc>
+					</retval>
+				</method>
+			</methods>
+		</class>
+	</classes>
+</lib>

@@ -1,0 +1,31 @@
+CPL Guidelines
+
+Required CPL libraries should be require_once()'d
+Example:
+	my_prog.php:
+		require_once 'DBH.inc';
+
+The CPL directory should be in your include_path so that you don't hard-code the path in a program.
+Example:
+	.htaccess:
+		php_value include_path '.:/usr/local/lib/php-cpl'
+
+CPL libraries require the existance of a function named handle_fatal_error() which accepts
+a string argument containing a descriptive error message that you can handle any way
+you choose.
+Example:
+	my_lib.inc:
+		function handle_fatal_error($msg)
+		{
+			echo $msg;
+			
+			die();
+		}
+
+CPL libraries require the existance of two constants, ``SYS_ROOT'' and ``WEB_ROOT,'' which
+respectively contain the system pathes to the Web site's root index.
+Note: these constants must not contain a trailing slash.
+Example:
+	my_lib.inc:
+		define("SYS_ROOT","/home/luser/www/htdocs",1);	
+		define("WEB_ROOT","/~luser");

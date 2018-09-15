@@ -1,0 +1,3 @@
+# $Id$
+
+XSLTPROC = xsltproc
